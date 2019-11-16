@@ -5,16 +5,34 @@ from datetime import date, datetime, time, timedelta
 import requests
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
+from sunflower.mixins import RedisMixin
 
 _stations = {}
 
 
-class Station:
+class Station(RedisMixin):
+    """Base station.
+
+    User defined stations should inherit from this class and define following properties:
+    - station_name (str)
+    - station_thumbnail (str): link to station thumbnail
+    """
+
     def __init_subclass__(cls):
         if hasattr(cls, "station_name"):
             global _stations
             _stations[cls.station_name] = cls
         return super().__init_subclass__()
+
+    def get_from_redis(self, key):
+        """Get key from redis and perform other checkings."""
+        store_data = super().get_from_redis(key)
+        if store_data is None:
+            return None
+        if key == self.REDIS_METADATA:
+            if store_data["station"] != self.station_name:
+                raise KeyError("Station names not matching.")
+        return json.loads(store_data.decode())
 
 
     def get_metadata(self):
@@ -59,7 +77,7 @@ class RTL2(Station):
         return ""
 
     def format_info(self):
-        metadata = self.get_metadata()
+        metadata = self.get_from_redis(self.REDIS_METADATA)
         card_info = {
             "current_thumbnail": metadata["thumbnail"],
             "current_broadcast_end": metadata["end"] * 1000, # client needs timestamp in ms
@@ -174,7 +192,7 @@ class RadioFranceStation(Station):
     """
 
     def format_info(self):
-        metadata = self.get_metadata()
+        metadata = self.get_from_redis(self.REDIS_METADATA)
         card_info = {
             "current_broadcast_title": metadata.get("diffusion_title", metadata["show_title"]),
             "current_thumbnail": metadata["thumbnail_src"],
