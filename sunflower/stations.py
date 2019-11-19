@@ -5,7 +5,7 @@ from datetime import date, datetime, time, timedelta
 import requests
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
-from sunflower.mixins import RedisMixin
+from sunflower.utils import RedisMixin
 
 _stations = {}
 
