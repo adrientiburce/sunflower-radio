@@ -14,7 +14,7 @@ from sunflower import settings
 from sunflower.utils import RedisMixin, Song
 
 class Radio(RedisMixin):
-    def __init__(self, logger):
+    def __init__(self, logger=None):
         super().__init__()
         from sunflower.stations import _stations
         self.backup_songs = []
