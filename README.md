@@ -82,12 +82,4 @@ $ poetry run flask run
 - Aller à `localhost:8080` pour accéder au client de lecture.
 - Aller à `localhost:8080/on-air` pour accéder métadonnées au format json du programme en cours.
 
-## Feuille de route
- 
-- [x] Mise à jour des champs en temps réel
-- [ ] Jingles horaires et de transition
-- [x] Mettre une musique à la place de la pub pour RTL 2
-- [x] Rendre la page du lecteur responsive
-- [x] Thème sombre
-- [ ] Faire de la page du lecteur une PWA
-- [ ] Faire du projet une lib
+## [Feuille de route](https://www.notion.so/pycolore/8d3ac48b09a8430198ccb8a48519ca65?v=1e22ba60e2494acb88cccc0a230170d7)
