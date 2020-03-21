@@ -16,14 +16,14 @@ class Station(RedisMixin):
     - station_url (str): url to music stream
     """
 
-    def __init_subclass__(cls):
-        if not hasattr(cls, "station_name"):
-            return super().__init_subclass__()
-        assert hasattr(cls, 'station_thumbnail'), "Station object must define 'station_thumbnail' attribute."
-        assert hasattr(cls, 'station_url'), "Station object must define 'station_url' attribute."
-        global _stations
-        _stations[cls.station_name] = cls
-        return super().__init_subclass__()
+    # def __init_subclass__(cls):
+    #     if not hasattr(cls, "station_name"):
+    #         return super().__init_subclass__()
+    #     assert hasattr(cls, 'station_thumbnail'), "Station object must define 'station_thumbnail' attribute."
+    #     assert hasattr(cls, 'station_url'), "Station object must define 'station_url' attribute."
+    #     global _stations
+    #     _stations[cls.station_name] = cls
+    #     return super().__init_subclass__()
 
     def get_from_redis(self, key):
         """Get key from redis and perform other checkings."""
