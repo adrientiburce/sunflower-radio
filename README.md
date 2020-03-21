@@ -82,4 +82,4 @@ $ poetry run flask run
 - Aller à `localhost:8080` pour accéder au client de lecture.
 - Aller à `localhost:8080/on-air` pour accéder métadonnées au format json du programme en cours.
 
-## [Feuille de route](https://www.notion.so/pycolore/8d3ac48b09a8430198ccb8a48519ca65?v=1e22ba60e2494acb88cccc0a230170d7)
+## [Feuille de route](https://github.com/Arkelis/sunflower-radio/projects/1)
