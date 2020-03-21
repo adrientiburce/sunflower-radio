@@ -7,9 +7,6 @@ from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from sunflower.utils import RedisMixin
 
-_stations = {}
-
-
 class Station(RedisMixin):
     """Base station.
 
